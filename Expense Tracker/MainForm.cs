@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Expense_Tracker
@@ -15,10 +16,18 @@ namespace Expense_Tracker
         {
             InitializeComponent();
 
-            sql_con = new SQLiteConnection("Data Source=ExpenseT.db;Version=3;New=False;Compress=True;");
+            if (!File.Exists(Application.StartupPath + "\\ExpenseTracker.db"))
+            {
+                MessageBox.Show("Can't find database");
+                File.WriteAllBytes(Application.StartupPath + "\\ExpenseTracker.db", Properties.Resources.ExpenseTracker);
+            }
+
+            sql_con = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\ExpenseTracker.db;Version=3;New=False;Compress=True;");
             sql_cmd = new SQLiteCommand();
             sql_con.Open();
             sql_cmd.Connection = sql_con;
+
+            Console.WriteLine(Environment.CurrentDirectory);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

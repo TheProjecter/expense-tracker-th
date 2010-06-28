@@ -73,5 +73,12 @@ namespace Expense_Tracker.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static byte[] ExpenseTracker {
+            get {
+                object obj = ResourceManager.GetObject("ExpenseTracker", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
