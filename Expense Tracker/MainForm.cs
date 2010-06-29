@@ -2,6 +2,7 @@
 using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Expense_Tracker
@@ -18,20 +19,28 @@ namespace Expense_Tracker
 
             if (!File.Exists(Application.StartupPath + "\\ExpenseTracker.db"))
             {
-                MessageBox.Show("Can't find database");
                 File.WriteAllBytes(Application.StartupPath + "\\ExpenseTracker.db", Properties.Resources.ExpenseTracker);
+            }
+            if (!File.Exists(Application.StartupPath + "\\SQLite.dll"))
+            {
+                File.WriteAllBytes(Application.StartupPath + "\\SQLite.dll", Properties.Resources.SQLite);
+            }
+            if (!File.Exists(Application.StartupPath + "\\ZedGraph.dll"))
+            {
+                File.WriteAllBytes(Application.StartupPath + "\\ZedGraph.dll", Properties.Resources.ZedGraph);
             }
 
             sql_con = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\ExpenseTracker.db;Version=3;New=False;Compress=True;");
             sql_cmd = new SQLiteCommand();
             sql_con.Open();
             sql_cmd.Connection = sql_con;
-
-            Console.WriteLine(Environment.CurrentDirectory);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.AssemblyResolve += new ResolveEventHandler(MyResolveEventHandler);
+
             sql_cmd.CommandText = "SELECT * FROM Month WHERE Year = '" + GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + GetThaiMonth(DateTime.Today.Month) + "'";
             sql_reader = sql_cmd.ExecuteReader();
             if (!sql_reader.HasRows)
@@ -350,6 +359,28 @@ namespace Expense_Tracker
             Graph g = new Graph();
             g.ShowDialog();
             g.Dispose();
+        }
+
+        private Assembly MyResolveEventHandler(object sender, ResolveEventArgs args)
+        {
+            Assembly MyAssembly, objExecutingAssemblies;
+            string assembPath = "";
+
+            objExecutingAssemblies = Assembly.GetExecutingAssembly();
+            AssemblyName[] arrReferencedAssmbNames = objExecutingAssemblies.GetReferencedAssemblies();
+
+            foreach (AssemblyName strAssmbName in arrReferencedAssmbNames)
+            {
+                if (strAssmbName.FullName.Substring(0, strAssmbName.FullName.IndexOf(',')) == args.Name.Substring(0, args.Name.IndexOf(',')))
+                {
+                    assembPath = Application.StartupPath + "\\" + args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
+                    break;
+                }
+            }
+
+            MyAssembly = Assembly.LoadFrom(assembPath);
+
+            return MyAssembly;
         }
     }
 }
