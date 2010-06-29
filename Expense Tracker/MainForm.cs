@@ -15,10 +15,33 @@ namespace Expense_Tracker
 
         string applicationPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ExpenseTracker";
 
+        private Assembly MyResolveEventHandler(object sender, ResolveEventArgs args)
+        {
+            Assembly MyAssembly, objExecutingAssemblies;
+            string assemblyPath = "";
+
+            objExecutingAssemblies = Assembly.GetExecutingAssembly();
+            AssemblyName[] arrReferencedAssemblyNames = objExecutingAssemblies.GetReferencedAssemblies();
+
+            foreach (AssemblyName assemblyName in arrReferencedAssemblyNames)
+            {
+                if (assemblyName.FullName.Substring(0, assemblyName.FullName.IndexOf(',')) == args.Name.Substring(0, args.Name.IndexOf(',')))
+                {
+                    assemblyPath = applicationPath + "\\" + args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
+                    break;
+                }
+            }
+
+            MyAssembly = Assembly.LoadFrom(assemblyPath);
+
+            return MyAssembly;
+        }
+
         public MainForm()
         {
             InitializeComponent();
 
+            // Copy DLL to %APPDATA% directory
             if (!Directory.Exists(applicationPath))
             {
                 Directory.CreateDirectory(applicationPath);
@@ -36,6 +59,7 @@ namespace Expense_Tracker
                 File.WriteAllBytes(applicationPath + "\\ZedGraph.dll", Properties.Resources.ZedGraph);
             }
 
+            // Connect to database file
             sql_con = new SQLiteConnection("Data Source=" + applicationPath + "\\ExpenseTracker.db;Version=3;New=False;Compress=True;");
             sql_cmd = new SQLiteCommand();
             sql_con.Open();
@@ -44,9 +68,12 @@ namespace Expense_Tracker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // Resolve assemblies path
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.AssemblyResolve += new ResolveEventHandler(MyResolveEventHandler);
 
+            // Is there a record for this month ?
+            // If not then create one
             sql_cmd.CommandText = "SELECT * FROM Month WHERE Year = '" + GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + GetThaiMonth(DateTime.Today.Month) + "'";
             sql_reader = sql_cmd.ExecuteReader();
             if (!sql_reader.HasRows)
@@ -365,28 +392,6 @@ namespace Expense_Tracker
             Graph g = new Graph();
             g.ShowDialog();
             g.Dispose();
-        }
-
-        private Assembly MyResolveEventHandler(object sender, ResolveEventArgs args)
-        {
-            Assembly MyAssembly, objExecutingAssemblies;
-            string assemblyPath = "";
-
-            objExecutingAssemblies = Assembly.GetExecutingAssembly();
-            AssemblyName[] arrReferencedAssemblyNames = objExecutingAssemblies.GetReferencedAssemblies();
-
-            foreach (AssemblyName assemblyName in arrReferencedAssemblyNames)
-            {
-                if (assemblyName.FullName.Substring(0, assemblyName.FullName.IndexOf(',')) == args.Name.Substring(0, args.Name.IndexOf(',')))
-                {
-                    assemblyPath = applicationPath + "\\" + args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
-                    break;
-                }
-            }
-
-            MyAssembly = Assembly.LoadFrom(assemblyPath);
-
-            return MyAssembly;
         }
     }
 }
