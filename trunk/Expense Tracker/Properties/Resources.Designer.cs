@@ -80,5 +80,19 @@ namespace Expense_Tracker.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        internal static byte[] SQLite {
+            get {
+                object obj = ResourceManager.GetObject("SQLite", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] ZedGraph {
+            get {
+                object obj = ResourceManager.GetObject("ZedGraph", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
