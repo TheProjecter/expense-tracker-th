@@ -40,6 +40,8 @@
             this.cmbType = new System.Windows.Forms.ComboBox();
             this.txtboxAmount = new System.Windows.Forms.TextBox();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.lbStatus = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // lbToday0
@@ -154,11 +156,30 @@
             // 
             // dateTimePicker
             // 
+            this.dateTimePicker.CustomFormat = "dd MMMM yyyy";
+            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker.Location = new System.Drawing.Point(102, 7);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.ShowUpDown = true;
-            this.dateTimePicker.Size = new System.Drawing.Size(171, 27);
+            this.dateTimePicker.Size = new System.Drawing.Size(334, 27);
             this.dateTimePicker.TabIndex = 7;
+            // 
+            // lbStatus
+            // 
+            this.lbStatus.AutoSize = true;
+            this.lbStatus.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStatus.ForeColor = System.Drawing.Color.Red;
+            this.lbStatus.Location = new System.Drawing.Point(19, 185);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(132, 18);
+            this.lbStatus.TabIndex = 8;
+            this.lbStatus.Text = "กรอกข้อมูลไม่ครบ";
+            this.lbStatus.Visible = false;
+            // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             // 
             // AddTransactionForm
             // 
@@ -166,6 +187,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(448, 223);
+            this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.txtboxAmount);
             this.Controls.Add(this.cmbType);
@@ -206,5 +228,7 @@
         public System.Windows.Forms.ComboBox cmbType;
         public System.Windows.Forms.TextBox txtboxAmount;
         public System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.Label lbStatus;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }

@@ -58,14 +58,14 @@ namespace Expense_Tracker
             if (frm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 dataGridView.Rows.Add(new Object[] {
-                    frm.dateTimePicker.Value.ToLongDateString(),
+                    frm.dateTimePicker.Value.Day + " " + GetThaiMonth(frm.dateTimePicker.Value.Month) + " " + GetThaiYear(frm.dateTimePicker.Value.Year),
                     frm.txtboxDescription.Text,
                     frm.cmbType.SelectedItem.ToString(),
                     (frm.cmbType.SelectedItem.ToString() == "รับ")? Properties.Resources._in : Properties.Resources._out,
                     Decimal.Parse(frm.txtboxAmount.Text).ToString("#,#0.00#")
                 });
 
-                sql_cmd.CommandText = "INSERT INTO Detail(Year,Month,Date,Description,Type,Amount) VALUES('" + GetThaiYear(DateTime.Today.Year) + "','" + GetThaiMonth(DateTime.Today.Month) + "','" + frm.dateTimePicker.Value.ToLongDateString() + "','" + frm.txtboxDescription.Text + "','" + frm.cmbType.SelectedItem.ToString() + "','" + frm.txtboxAmount.Text + "')";
+                sql_cmd.CommandText = "INSERT INTO Detail(Year,Month,Date,Description,Type,Amount) VALUES('" + GetThaiYear(DateTime.Today.Year) + "','" + GetThaiMonth(DateTime.Today.Month) + "','" + frm.dateTimePicker.Value.Day + " " + GetThaiMonth(frm.dateTimePicker.Value.Month) + " " + GetThaiYear(frm.dateTimePicker.Value.Year) + "','" + frm.txtboxDescription.Text + "','" + frm.cmbType.SelectedItem.ToString() + "','" + frm.txtboxAmount.Text + "')";
                 sql_cmd.ExecuteNonQuery();
 
                 UpdateTotalInDB();
@@ -132,12 +132,10 @@ namespace Expense_Tracker
 
         private void toolStripViewHistory_Click(object sender, EventArgs e)
         {
-            OpenGroupBox();
-
-            //if (groupBox.Size.Height == 0)
-            //{
-            //    OpenGroupBox();
-            //}
+            if (groupBox.Visible == false)
+                OpenGroupBox();
+            else
+                CloseGroupBox();
         }
 
         private void btnShowData_Click(object sender, EventArgs e)
@@ -234,22 +232,16 @@ namespace Expense_Tracker
 
         private void OpenGroupBox()
         {
-            //for (int i = 0; i < 80; i++)
-            //{
-            //    groupBox.Size = new Size(889, i);
-            //}
-
             groupBox.Visible = true;
+
+            Cursor.Position = new System.Drawing.Point(Cursor.Position.X, this.PointToScreen(toolStrip.Location).Y + 20);
         }
 
         private void CloseGroupBox()
         {
-            //for (int i = 80; i >= 0; i--)
-            //{
-            //    groupBox.Size = new Size(889, i);
-            //}
-
             groupBox.Visible = false;
+
+            Cursor.Position = new System.Drawing.Point(Cursor.Position.X, this.PointToScreen(toolStrip.Location).Y + 20);
 
             cmbYear.SelectedIndex = -1;
             cmbMonth.SelectedIndex = -1;
@@ -351,6 +343,13 @@ namespace Expense_Tracker
         {
             sql_cmd.CommandText = "UPDATE Month SET TotalIncome = '" + Decimal.Parse(txtboxTotalIncome.Text) + "', TotalExpense = '" + Decimal.Parse(txtboxTotalExpense.Text) + "', TotalBalance = '" + Decimal.Parse(txtboxTotalBalance.Text) + "' WHERE Year = '" + GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + GetThaiMonth(DateTime.Today.Month) + "'";
             sql_cmd.ExecuteNonQuery();
+        }
+
+        private void btnViewGraph_Click(object sender, EventArgs e)
+        {
+            Graph g = new Graph();
+            g.ShowDialog();
+            g.Dispose();
         }
     }
 }
