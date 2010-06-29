@@ -5,6 +5,19 @@ namespace Expense_Tracker
 {
     public partial class AddTransactionForm : Form
     {
+        public delegate void UpdateStatusVisibleDelegate(bool status);
+        public void UpdateStatusVisible(bool status)
+        {
+            if (this.lbStatus.InvokeRequired)
+            {
+                this.Invoke(new UpdateStatusVisibleDelegate(UpdateStatusVisible), status);
+            }
+            else
+            {
+                this.lbStatus.Visible = status;
+            }
+        }
+
         public AddTransactionForm()
         {
             InitializeComponent();
@@ -16,6 +29,11 @@ namespace Expense_Tracker
             {
                 DialogResult = System.Windows.Forms.DialogResult.OK;
                 Hide();
+            }
+            else
+            {
+                if(!backgroundWorker.IsBusy)
+                    backgroundWorker.RunWorkerAsync();
             }
         }
 
@@ -30,7 +48,7 @@ namespace Expense_Tracker
 
         private void txtboxAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !(Char.IsDigit(e.KeyChar) || (Keys)(e.KeyChar) == Keys.Back || (Keys)(e.KeyChar) == Keys.Enter);
+            e.Handled = !(Char.IsDigit(e.KeyChar) || (Keys)(e.KeyChar) == Keys.Back || (Keys)(e.KeyChar) == Keys.Enter || e.KeyChar == '.');
 
             if ((Keys)e.KeyChar == Keys.Enter)
             {
@@ -42,5 +60,20 @@ namespace Expense_Tracker
         {
             e.Handled = !(e.KeyChar != '\'' && e.KeyChar != '\"');
         }
+
+        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            UpdateStatusVisible(true);
+            System.Threading.Thread.Sleep(500);
+            UpdateStatusVisible(false);
+            System.Threading.Thread.Sleep(500);
+            UpdateStatusVisible(true);
+            System.Threading.Thread.Sleep(500);
+            UpdateStatusVisible(false);
+            System.Threading.Thread.Sleep(500);
+            UpdateStatusVisible(true);
+            System.Threading.Thread.Sleep(3000);
+            UpdateStatusVisible(false);
+        }   
     }
 }
