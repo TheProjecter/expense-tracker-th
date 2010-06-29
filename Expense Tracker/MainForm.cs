@@ -13,24 +13,30 @@ namespace Expense_Tracker
         SQLiteCommand sql_cmd;
         SQLiteDataReader sql_reader;
 
+        string applicationPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ExpenseTracker";
+
         public MainForm()
         {
             InitializeComponent();
 
-            if (!File.Exists(Application.StartupPath + "\\ExpenseTracker.db"))
+            if (!Directory.Exists(applicationPath))
             {
-                File.WriteAllBytes(Application.StartupPath + "\\ExpenseTracker.db", Properties.Resources.ExpenseTracker);
+                Directory.CreateDirectory(applicationPath);
             }
-            if (!File.Exists(Application.StartupPath + "\\SQLite.dll"))
+            if (!File.Exists(applicationPath + "\\ExpenseTracker.db"))
             {
-                File.WriteAllBytes(Application.StartupPath + "\\SQLite.dll", Properties.Resources.SQLite);
+                File.WriteAllBytes(applicationPath + "\\ExpenseTracker.db", Properties.Resources.ExpenseTracker);
             }
-            if (!File.Exists(Application.StartupPath + "\\ZedGraph.dll"))
+            if (!File.Exists(applicationPath + "\\SQLite.dll"))
             {
-                File.WriteAllBytes(Application.StartupPath + "\\ZedGraph.dll", Properties.Resources.ZedGraph);
+                File.WriteAllBytes(applicationPath + "\\SQLite.dll", Properties.Resources.SQLite);
+            }
+            if (!File.Exists(applicationPath + "\\ZedGraph.dll"))
+            {
+                File.WriteAllBytes(applicationPath + "\\ZedGraph.dll", Properties.Resources.ZedGraph);
             }
 
-            sql_con = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\ExpenseTracker.db;Version=3;New=False;Compress=True;");
+            sql_con = new SQLiteConnection("Data Source=" + applicationPath + "\\ExpenseTracker.db;Version=3;New=False;Compress=True;");
             sql_cmd = new SQLiteCommand();
             sql_con.Open();
             sql_cmd.Connection = sql_con;
@@ -364,21 +370,21 @@ namespace Expense_Tracker
         private Assembly MyResolveEventHandler(object sender, ResolveEventArgs args)
         {
             Assembly MyAssembly, objExecutingAssemblies;
-            string assembPath = "";
+            string assemblyPath = "";
 
             objExecutingAssemblies = Assembly.GetExecutingAssembly();
-            AssemblyName[] arrReferencedAssmbNames = objExecutingAssemblies.GetReferencedAssemblies();
+            AssemblyName[] arrReferencedAssemblyNames = objExecutingAssemblies.GetReferencedAssemblies();
 
-            foreach (AssemblyName strAssmbName in arrReferencedAssmbNames)
+            foreach (AssemblyName assemblyName in arrReferencedAssemblyNames)
             {
-                if (strAssmbName.FullName.Substring(0, strAssmbName.FullName.IndexOf(',')) == args.Name.Substring(0, args.Name.IndexOf(',')))
+                if (assemblyName.FullName.Substring(0, assemblyName.FullName.IndexOf(',')) == args.Name.Substring(0, args.Name.IndexOf(',')))
                 {
-                    assembPath = Application.StartupPath + "\\" + args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
+                    assemblyPath = applicationPath + "\\" + args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
                     break;
                 }
             }
 
-            MyAssembly = Assembly.LoadFrom(assembPath);
+            MyAssembly = Assembly.LoadFrom(assemblyPath);
 
             return MyAssembly;
         }
