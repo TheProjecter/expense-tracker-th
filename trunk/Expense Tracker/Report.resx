@@ -117,28 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripGraph.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAp1JREFUOE+N0OtL
+        UwEYBvAVWNAn+w/sQ5+iIuiTXSBE0wiLCi8xKykdNmmbQRcjCyszTZfaRq2FTNJQvIQzzcta7aINycvc
+        nNvSTVubaXa2nLu5nafTGeUpHPTC+/H98bzPBtZ/jqDJxt+yaSMvbnNcQvzWeFaEJN0Ou2OMNSHn3jbK
+        ubbJLi4mey7B1FlAmBvYyn/dPIkRsrc22N0kLEsRtGg+4UBhE1j6VwXwOhUg/SqE/GosmhtgFR3DesD4
+        fATS4QCeqn04elW+BsBvB/lVAYeyGM7erJiAYSGCKpUftcoVpFxTMoAABbje4JuaD++HnJiAaYlEjTZA
+        A4dLhhlAyEEBvfDoihAez40JWAgSIl0USL1jZACrTpDzfSC0+SANF9DTkY26icu2F3PlaHFVo9lVNcqW
+        qGClCnwyHEQNBaTdn2YAYRcizi58f38aMOaBP3AI/c52fPRpMBXU47WrFScl7bB4whDrgqhWrODIg9m/
+        gbD1MZYYwGRwFPWOcjTYSpHRu+sPcE/hh/AXUPGZAQRnsGq4hYWBLOqF83QCU3AMdbPFeDZzHWzVThow
+        u8O4IvdFE1TMMYAfGoQnSjDXlYHQ2DkamArp8XCaD5FVgLPa3TQwsrAKXpsXVf1UB+V2BrDYSQOmxnR4
+        Btk0YAyOgKM7SAM5mugLQ19C4LxcRmUfBZRZ1oBloxiRGSl0dclwtJ2gAa27mzrcA+HURWQqdtBAtzWA
+        nHoPDaSW6n8DHKGhOVdpkmUTZskpWETphOBdCsSGmxAaeKg1CZAkTaCBplEfMiUEynq8SL4xFAXWG546
+        lZ8l26tMq9xuS7q7DdQSZySDKG2zo0y+iEdUiYncjtjAemiueJyfXNSq3Jf/3JaYJ0UiR0bsL2w8/hP6
+        EmeSklzFrAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
-        AAD///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B0ZdicaxzRr+eZzzfnGU6/6Fo
-        O++mbD1R////Af///wH///8B////Af///wFJw3BxNKJYvyaMSd8hhEP/IYRD78aaXv/grYL/67OG//W9
-        kP+vazr/pmw9/2iw0o9iqdS/WqHX71Sa2f9PldvvRsBx/33Ulv9v1I//cdeS/yCcQ/+umlP/9s+m/++a
-        V//0t4b/x3tF/6ZsPf9psNL/ltXz/5ze/f9Fk8n/Uq3k/0G8cP+28MX/McRd/2rYj/8rvVf/rppT//jb
-        tv/xn13/9bqL/9KCSP+mbD3/abDS/7Lr//9+0/z/TqXX/1zG8f9BvHD/zvnV/z7JZ/9x25X/LsRd/66a
-        U//65cf/86dn//W6i//ahkn/pmw9/2mw0v/E8v//ftP8/1a04v9g0Pr/Qbxw/9L62P9w3Yz/cduV/y/F
-        X/+umlP/++rO//Stb//1u43/4IhJ/6ZsPf9psNL/3vn//3/U+/9YvOr/Y9T+/0G8cP/Q+df/euGT/3ne
-        m/8twlz/rppT//zw2f/2s3b/9b2O/+KKSv+mbD3/abDS/+f8//+U2/z/WsHt/2XV//9BvHD/z/nW/4jk
-        n/+C36L/LrlW/66aU//88dr/972F//W9j//jikr/pmw9/2mw0v/n/P//tOb9/1rB7v9l1f//Qbxw/67m
-        u//E9s3/0vnY/6zntf+umlP//PHa//nJlv/1vY7/4YlK/6ZsPf9psNL/5vv//7ro/v9mxe//ZNT+/1mv
-        t/9005PfiOKk/47nqv+O56rPwppc//7w2//5y5j/9b+R/92HSf+mbD3/abDS/+T6//+55/7/csnx/2HR
-        /P9Pldv/////Af///wH///8B////AdWaZf/+79r/+MmV//W/kv/Vg0j/pmw9/2mw0v/g+P//uOf+/3DD
-        7P9dyPT/T5Xb/////wH///8B////Af///wHVmmX//u3X//jFkf/1v5L/y35H/6ZsPf9psNL/4Pf//73p
-        /v96v+T/WLnm/0+V2/////8B////Af///wH///8B1Zpl//3q1P/3wo3/9b+S/794Rv+mbD3/abDS/73m
-        9P/C9/7/w/f6/6LZ6/9Pldv/////Af///wH///8B////AdWaZf/96NH/+Muc//bDmf+zd0z/pmw9/2uz
-        1IFrtNbfa7TW/2631v9qstfvXKPZv////wH///8B////Af///wHVmmX/376h//7w4P/97dr/3MSq/6Zs
-        Pf////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B36dyceGte9/ms4D/9sSQ//TC
-        ju/Yo3G/AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        AAAAAAAfFxcXhRUVFYMVFRWDFRUVgxMTE4MTExODExMTgxMTE4MTExODExMTgxEREYURERGFAAAAKf//
+        /wH///8BCQkJUfz8/P/7+/v/+fn5//n5+f/39/f/9/f3//f39//19fX/9fX1//X19f/19fX//Pz8/xUV
+        FWn///8B////AQkJCVH8/Pz/tra2/7i4uP+2trb/w8PD/8DAwP/Jycn/xMTE/8DAwP/Jycn/5OTk//n5
+        +f8VFRVp////Af///wEJCQlR/Pz8/729vf+7u7v/v7+//7y8vP+ysrL/w8PD/729vf++vr7/wsLC/+Pj
+        4//7+/v/FRUVaf///wH///8BDAwMUfz8/P/k5OT/5+fn/+fn5//n5+f/5ubm/+jo6P/r6+v/7Ozs/+vr
+        6//s7Oz//Pz8/xgYGGn///8B////AQwMDFH8/Pz/1tbW/9ra2v/T09P/19fX/9PT0//g4OD/7Ozs/+np
+        6f/r6+v/6enp//z8/P8YGBhp////Af///wEMDAxR/Pz8/729vf++vr7/vLy8/76+vv+8vLz/29vb/+Hh
+        4f++vr7/wsLC/8TExP/8/Pz/GBgYaf///wH///8BDAwMUfz8/P/y8vL/9vb2/+3t7f/19fX/9fX1//Hx
+        8f/o6Oj/29vb/8/Pz//Pz8///Pz8/xoaGmn///8B////AQwMDFH8/Pz/3t7e/+Hh4f/b29v/4ODg/97e
+        3v/p6en/+Pj4//n5+f/5+fn/+fn5//z8/P8aGhpp////Af///wEMDAxR/Pz8/7+/v//AwMD/vr6+/8DA
+        wP++vr7/4eHh/+bm5v/Y2Nj/2tra/9HR0f/8/Pz/Ghoaaf///wH///8BDAwMUfz8/P/39/f/+Pj4//Pz
+        8//4+Pj/9/f3//j4+P/7+/v/+/v7//f39//z8/P//Pz8/xoaGmn///8B////AQwMDFH8/Pz/1tbW/9vb
+        2//W1tb/2NjY/9vb2//a2tr//Pz8/8bGxv/MzMz/ycnJ/9ra2v8ZGRln////Af///wEMDAxR/Pz8/+fn
+        5//r6+v/6+vr/+zs7P/r6+v/6Ojo//v7+//Ly8v/6Ojo//z8/P+Li4vHAAAAGf///wH///8BDAwMUfz8
+        /P/V1dX/29vb/8zMzP/X19f/1dXV/9PT0//39/f/z8/P//z8/P+Xl5fHAAAAFf///wH///8B////AQwM
+        DFH8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/8/Pz/9/f3/9ra2v+dnZ3LAAAAD////wH///8B////Af//
+        /wH///8Bvr6++by8vPW8vLz1vLy89by8vPW8vLz1vLy89b6+vvenp6fFAAAAGf///wH///8B////Af//
+        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
         //8AAP//AAD//w==
 </value>
   </data>

@@ -374,11 +374,11 @@ namespace Expense_Tracker
             sql_cmd.ExecuteNonQuery();
         }
 
-        private void btnViewGraph_Click(object sender, EventArgs e)
+        private void toolStripReport_Click(object sender, EventArgs e)
         {
-            Graph g = new Graph();
-            g.ShowDialog();
-            g.Dispose();
+            Report rpt = new Report();
+            rpt.ShowDialog();
+            rpt.Dispose();
         }
     }
 }
