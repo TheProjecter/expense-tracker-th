@@ -1,21 +1,33 @@
 ﻿using System;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Windows.Forms;
 using ZedGraph;
+using System.Collections.Generic;
 
 namespace Expense_Tracker
 {
     public partial class Graph : Form
     {
-        private string[] months = {
-            "มกราคม","กุมภาพันธ์","มีนาคม","เมษายน",
-            "พฤษภาคม","มิถุนายน","กรกฏาคม","สิงหาคม",
-            "กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"
-        };
+        SQLiteConnection sql_con;
+        SQLiteCommand sql_cmd;
+        SQLiteDataReader sql_reader;
+
+        string applicationPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ExpenseTracker";
+
+        private List<string> monthsLabel;
 
         public Graph()
         {
             InitializeComponent();
+
+            monthsLabel = new List<string>();
+            
+            // Connect to database file
+            sql_con = new SQLiteConnection("Data Source=" + applicationPath + "\\ExpenseTracker.db;Version=3;New=False;Compress=True;");
+            sql_cmd = new SQLiteCommand();
+            sql_con.Open();
+            sql_cmd.Connection = sql_con;
 
             CreateChart(zedGraphControl);
         }
@@ -32,44 +44,36 @@ namespace Expense_Tracker
             myPane.XAxis.Title.FontSpec.Size = 16;
             myPane.XAxis.Title.Text = "เดือน";
             myPane.XAxis.Type = AxisType.Text;
-            myPane.XAxis.Scale.TextLabels = months;
-            myPane.XAxis.Scale.FontSpec.Angle = 65;
-            myPane.XAxis.Scale.MinorStep = 1;
+            myPane.XAxis.Scale.TextLabels = monthsLabel.ToArray();
             myPane.YAxis.Title.FontSpec.Family = "Browallia New";
             myPane.YAxis.Title.FontSpec.Size = 24;
             myPane.YAxis.Title.Text = "จำนวนเงิน";
 
-            PointPairList list = new PointPairList();
-            PointPairList list2 = new PointPairList();
+            PointPairList lstIncome = new PointPairList();
+            PointPairList lstExpense = new PointPairList();
             Random rand = new Random();
 
-            // Generate random data for three curves
-            for (int i = 1; i <= 12; i++)
+            // Load data for this month
+            sql_cmd.CommandText = "SELECT Month, TotalIncome, TotalExpense FROM Month WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "'";
+            sql_reader = sql_cmd.ExecuteReader();
+            while (sql_reader.Read())
             {
-                double x = (double)i;
-                double y = rand.NextDouble() * 1000;
-                double y2 = rand.NextDouble() * 1000;
-                double y3 = rand.NextDouble() * 1000;
-                list.Add(x, y);
-                list2.Add(x, y2);
+                monthsLabel.Add(sql_reader.GetString(0));
+                lstIncome.Add(0, sql_reader.GetDouble(1));
+                lstExpense.Add(0, sql_reader.GetDouble(2));
             }
+            sql_reader.Close();
 
-            // create the curves
-            BarItem myCurve = myPane.AddBar("รายรับ", list, Color.Blue);
-            BarItem myCurve2 = myPane.AddBar("รายจ่าย", list2, Color.Red);
+            BarItem myCurve = myPane.AddBar("รายรับ", lstIncome, Color.Blue);
+            BarItem myCurve2 = myPane.AddBar("รายจ่าย", lstExpense, Color.Red);
 
-            // Fill the axis background with a color gradient
-            myPane.Chart.Fill = new Fill(Color.White,
-               Color.FromArgb(255, 255, 166), 45.0F);
+            myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 166), 45.0F);
 
             zgc.AxisChange();
 
-            // expand the range of the Y axis slightly to accommodate the labels
             myPane.YAxis.Scale.Max += myPane.YAxis.Scale.MajorStep;
 
-            // Create TextObj's to provide labels for each bar
-            BarItem.CreateBarLabels(myPane, false, "f0");
-
+            BarItem.CreateBarLabels(myPane, false, "#,#0.00#", "SegoeUI", 8, Color.Black, true, false, false);
         }
     }
 }
