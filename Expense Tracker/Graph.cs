@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Windows.Forms;
 using ZedGraph;
-using System.Collections.Generic;
 
 namespace Expense_Tracker
 {
@@ -36,6 +36,9 @@ namespace Expense_Tracker
         {
             GraphPane myPane = zgc.GraphPane;
 
+            PointPairList lstIncome = new PointPairList();
+            PointPairList lstExpense = new PointPairList();
+
             // Set the title and axis labels
             myPane.Title.FontSpec.Family = "Browallia New";
             myPane.Title.FontSpec.Size = 24;
@@ -44,14 +47,9 @@ namespace Expense_Tracker
             myPane.XAxis.Title.FontSpec.Size = 16;
             myPane.XAxis.Title.Text = "เดือน";
             myPane.XAxis.Type = AxisType.Text;
-            myPane.XAxis.Scale.TextLabels = monthsLabel.ToArray();
             myPane.YAxis.Title.FontSpec.Family = "Browallia New";
             myPane.YAxis.Title.FontSpec.Size = 24;
             myPane.YAxis.Title.Text = "จำนวนเงิน";
-
-            PointPairList lstIncome = new PointPairList();
-            PointPairList lstExpense = new PointPairList();
-            Random rand = new Random();
 
             // Load data for this month
             sql_cmd.CommandText = "SELECT Month, TotalIncome, TotalExpense FROM Month WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "'";
@@ -64,16 +62,29 @@ namespace Expense_Tracker
             }
             sql_reader.Close();
 
+            myPane.XAxis.Scale.FontSpec.Family = "Browallia New";
+            myPane.XAxis.Scale.FontSpec.Size = 16;
+            myPane.XAxis.Scale.TextLabels = monthsLabel.ToArray();
+            
             BarItem myCurve = myPane.AddBar("รายรับ", lstIncome, Color.Blue);
             BarItem myCurve2 = myPane.AddBar("รายจ่าย", lstExpense, Color.Red);
 
             myPane.Chart.Fill = new Fill(Color.White, Color.FromArgb(255, 255, 166), 45.0F);
 
-            zgc.AxisChange();
-
             myPane.YAxis.Scale.Max += myPane.YAxis.Scale.MajorStep;
+            
+            //BarItem.CreateBarLabels(myPane, false, "#,#0.00#", "Tahoma", 10, Color.Black, true, false, false);
 
-            BarItem.CreateBarLabels(myPane, false, "#,#0.00#", "SegoeUI", 8, Color.Black, true, false, false);
+            zgc.AxisChange();
+        }
+
+        private void Graph_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            sql_con.Close();
+
+            sql_con.Dispose();
+            sql_cmd.Dispose();
+            sql_reader.Dispose();
         }
     }
 }
