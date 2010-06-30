@@ -92,6 +92,7 @@
     <Compile Include="AddTransactionForm.Designer.cs">
       <DependentUpon>AddTransactionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomDate.cs" />
     <Compile Include="Graph.cs">
       <SubType>Form</SubType>
     </Compile>
