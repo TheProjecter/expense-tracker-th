@@ -27,8 +27,8 @@ namespace Expense_Tracker
             while (sql_reader.Read())
             {
                 dataGridView.Rows.Add(
-                    sql_reader.GetString(0), 
-                    sql_reader.GetString(1), 
+                    sql_reader.GetInt32(0),
+                    CustomDate.GetThaiMonth(sql_reader.GetInt32(1)), 
                     sql_reader.GetDecimal(2).ToString("#,#0.00#"), 
                     sql_reader.GetDecimal(3).ToString("#,#0.00#"), 
                     sql_reader.GetDecimal(4).ToString("#,#0.00#")

@@ -39,6 +39,9 @@ namespace Expense_Tracker
 
         public MainForm()
         {
+            Password pwd = new Password();
+            pwd.ShowDialog();
+
             InitializeComponent();
 
             // Copy DLL to %APPDATA% directory
@@ -76,12 +79,12 @@ namespace Expense_Tracker
 
             // Is there a record for this month ?
             // If not then create one
-            sql_cmd.CommandText = "SELECT * FROM Month WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + CustomDate.GetThaiMonth(DateTime.Today.Month) + "'";
+            sql_cmd.CommandText = "SELECT * FROM Month WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + DateTime.Today.Month + "'";
             sql_reader = sql_cmd.ExecuteReader();
             if (!sql_reader.HasRows)
             {
                 sql_reader.Close();
-                sql_cmd.CommandText = "INSERT INTO Month VALUES('" + CustomDate.GetThaiYear(DateTime.Today.Year) + "','" + CustomDate.GetThaiMonth(DateTime.Today.Month) + "',0,0,0)";
+                sql_cmd.CommandText = "INSERT INTO Month VALUES('" + CustomDate.GetThaiYear(DateTime.Today.Year) + "','" + DateTime.Today.Month + "',0,0,0)";
                 sql_cmd.ExecuteNonQuery();
 
                 string[] split = DateTime.Now.ToLongDateString().Split(' ');
@@ -109,7 +112,7 @@ namespace Expense_Tracker
                     Decimal.Parse(frm.txtboxAmount.Text).ToString("#,#0.00#")
                 });
 
-                sql_cmd.CommandText = "INSERT INTO Detail(Year,Month,Date,Description,Type,Amount) VALUES('" + CustomDate.GetThaiYear(DateTime.Today.Year) + "','" + CustomDate.GetThaiMonth(DateTime.Today.Month) + "','" + frm.dateTimePicker.Value.Day + " " + CustomDate.GetThaiMonth(frm.dateTimePicker.Value.Month) + " " + CustomDate.GetThaiYear(frm.dateTimePicker.Value.Year) + "','" + frm.txtboxDescription.Text + "','" + frm.cmbType.SelectedItem.ToString() + "','" + frm.txtboxAmount.Text + "')";
+                sql_cmd.CommandText = "INSERT INTO Detail(Year,Month,Date,Description,Type,Amount) VALUES('" + CustomDate.GetThaiYear(DateTime.Today.Year) + "','" + DateTime.Today.Month + "','" + frm.dateTimePicker.Value.Day + " " + CustomDate.GetThaiMonth(frm.dateTimePicker.Value.Month) + " " + CustomDate.GetThaiYear(frm.dateTimePicker.Value.Year) + "','" + frm.txtboxDescription.Text + "','" + frm.cmbType.SelectedItem.ToString() + "','" + frm.txtboxAmount.Text + "')";
                 sql_cmd.ExecuteNonQuery();
 
                 UpdateTotalInDB();
@@ -212,7 +215,7 @@ namespace Expense_Tracker
             ClearTable();
 
             // Load data for this month
-            sql_cmd.CommandText = "SELECT Date, Description, Type, Amount FROM Detail WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + CustomDate.GetThaiMonth(DateTime.Today.Month) + "'";
+            sql_cmd.CommandText = "SELECT Date, Description, Type, Amount FROM Detail WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + DateTime.Today.Month + "'";
             sql_reader = sql_cmd.ExecuteReader();
             while (sql_reader.Read())
             {
@@ -293,7 +296,7 @@ namespace Expense_Tracker
 
         private void LoadHistoryList()
         {
-            sql_cmd.CommandText = "SELECT DISTINCT Year FROM Month WHERE Year != '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' OR Month != '" + CustomDate.GetThaiMonth(DateTime.Today.Month) + "'";
+            sql_cmd.CommandText = "SELECT DISTINCT Year FROM Month WHERE Year != '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' OR Month != '" + DateTime.Today.Month + "'";
             sql_reader = sql_cmd.ExecuteReader();
             if (sql_reader.HasRows)
             {
@@ -316,13 +319,13 @@ namespace Expense_Tracker
             {
                 cmbMonth.Items.Clear();
 
-                sql_cmd.CommandText = "SELECT DISTINCT Month FROM Month WHERE Year = '" + cmbYear.SelectedItem + "' AND Month != '" + CustomDate.GetThaiMonth(DateTime.Today.Month) + "'";
+                sql_cmd.CommandText = "SELECT DISTINCT Month FROM Month WHERE Year = '" + cmbYear.SelectedItem + "' AND Month != '" + DateTime.Today.Month + "'";
                 sql_reader = sql_cmd.ExecuteReader();
                 if (sql_reader.HasRows)
                 {
                     while (sql_reader.Read())
                     {
-                        cmbMonth.Items.Add(sql_reader.GetString(0));
+                        cmbMonth.Items.Add(CustomDate.GetThaiMonth(sql_reader.GetInt32(0)));
                     }
                     cmbMonth.Enabled = true;
                 }
@@ -357,7 +360,7 @@ namespace Expense_Tracker
         {
             if (MessageBox.Show("Delete?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                sql_cmd.CommandText = "DELETE FROM Detail WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + CustomDate.GetThaiMonth(DateTime.Today.Month) + "' AND Date = '" + dataGridView.SelectedRows[0].Cells[0].Value + "' AND Description = '" + dataGridView.SelectedRows[0].Cells[1].Value + "' AND Type = '" + dataGridView.SelectedRows[0].Cells[2].Value + "' AND Amount = '" + dataGridView.SelectedRows[0].Cells[4].Value + "'";
+                sql_cmd.CommandText = "DELETE FROM Detail WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + DateTime.Today.Month + "' AND Date = '" + dataGridView.SelectedRows[0].Cells[0].Value + "' AND Description = '" + dataGridView.SelectedRows[0].Cells[1].Value + "' AND Type = '" + dataGridView.SelectedRows[0].Cells[2].Value + "' AND Amount = '" + dataGridView.SelectedRows[0].Cells[4].Value + "'";
                 sql_cmd.ExecuteNonQuery();
 
                 dataGridView.Rows.RemoveAt(dataGridView.SelectedRows[0].Index);
@@ -370,7 +373,7 @@ namespace Expense_Tracker
 
         private void UpdateTotalInDB()
         {
-            sql_cmd.CommandText = "UPDATE Month SET TotalIncome = '" + Decimal.Parse(txtboxTotalIncome.Text) + "', TotalExpense = '" + Decimal.Parse(txtboxTotalExpense.Text) + "', TotalBalance = '" + Decimal.Parse(txtboxTotalBalance.Text) + "' WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + CustomDate.GetThaiMonth(DateTime.Today.Month) + "'";
+            sql_cmd.CommandText = "UPDATE Month SET TotalIncome = '" + Decimal.Parse(txtboxTotalIncome.Text) + "', TotalExpense = '" + Decimal.Parse(txtboxTotalExpense.Text) + "', TotalBalance = '" + Decimal.Parse(txtboxTotalBalance.Text) + "' WHERE Year = '" + CustomDate.GetThaiYear(DateTime.Today.Year) + "' AND Month = '" + DateTime.Today.Month + "'";
             sql_cmd.ExecuteNonQuery();
         }
 

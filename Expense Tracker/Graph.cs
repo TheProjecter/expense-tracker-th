@@ -56,7 +56,7 @@ namespace Expense_Tracker
             sql_reader = sql_cmd.ExecuteReader();
             while (sql_reader.Read())
             {
-                monthsLabel.Add(sql_reader.GetString(0));
+                monthsLabel.Add(CustomDate.GetThaiMonth(sql_reader.GetInt32(0)));
                 lstIncome.Add(0, sql_reader.GetDouble(1));
                 lstExpense.Add(0, sql_reader.GetDouble(2));
             }

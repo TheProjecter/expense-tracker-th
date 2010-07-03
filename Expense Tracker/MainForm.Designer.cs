@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.btnCloseGroupBox = new System.Windows.Forms.Button();
             this.lbYear = new System.Windows.Forms.Label();
             this.cmbYear = new System.Windows.Forms.ComboBox();
+            this.btnShowData = new System.Windows.Forms.Button();
             this.cmbMonth = new System.Windows.Forms.ComboBox();
             this.lbMonth = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
@@ -46,6 +48,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbBaht3 = new System.Windows.Forms.Label();
             this.lbBaht2 = new System.Windows.Forms.Label();
             this.lbBaht1 = new System.Windows.Forms.Label();
@@ -56,20 +59,17 @@
             this.lbTotalExpense = new System.Windows.Forms.Label();
             this.lbTotalIncome = new System.Windows.Forms.Label();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripHeader = new System.Windows.Forms.ToolStripLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripAddTransaction = new System.Windows.Forms.ToolStripButton();
+            this.toolStripHeader = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripViewHistory = new System.Windows.Forms.ToolStripButton();
             this.toolStripBackToPresent = new System.Windows.Forms.ToolStripButton();
-            this.btnCloseGroupBox = new System.Windows.Forms.Button();
-            this.btnShowData = new System.Windows.Forms.Button();
             this.toolStripReport = new System.Windows.Forms.ToolStripButton();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel.SuspendLayout();
-            this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox
@@ -90,6 +90,22 @@
             this.groupBox.Text = "ข้อมูลย้อนหลัง";
             this.groupBox.Visible = false;
             // 
+            // btnCloseGroupBox
+            // 
+            this.btnCloseGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnCloseGroupBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCloseGroupBox.FlatAppearance.BorderSize = 0;
+            this.btnCloseGroupBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnCloseGroupBox.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnCloseGroupBox.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseGroupBox.Image")));
+            this.btnCloseGroupBox.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCloseGroupBox.Location = new System.Drawing.Point(838, 25);
+            this.btnCloseGroupBox.Name = "btnCloseGroupBox";
+            this.btnCloseGroupBox.Size = new System.Drawing.Size(42, 39);
+            this.btnCloseGroupBox.TabIndex = 5;
+            this.btnCloseGroupBox.UseVisualStyleBackColor = false;
+            this.btnCloseGroupBox.Click += new System.EventHandler(this.btnCloseGroupBox_Click);
+            // 
             // lbYear
             // 
             this.lbYear.AutoSize = true;
@@ -109,6 +125,20 @@
             this.cmbYear.Size = new System.Drawing.Size(84, 27);
             this.cmbYear.TabIndex = 3;
             this.cmbYear.SelectedIndexChanged += new System.EventHandler(this.cmbYear_SelectedIndexChanged);
+            // 
+            // btnShowData
+            // 
+            this.btnShowData.Enabled = false;
+            this.btnShowData.Image = ((System.Drawing.Image)(resources.GetObject("btnShowData.Image")));
+            this.btnShowData.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnShowData.Location = new System.Drawing.Point(387, 32);
+            this.btnShowData.Name = "btnShowData";
+            this.btnShowData.Size = new System.Drawing.Size(124, 28);
+            this.btnShowData.TabIndex = 2;
+            this.btnShowData.Text = "แสดงข้อมูล";
+            this.btnShowData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnShowData.UseVisualStyleBackColor = true;
+            this.btnShowData.Click += new System.EventHandler(this.btnShowData_Click);
             // 
             // cmbMonth
             // 
@@ -242,6 +272,17 @@
             this.panel.Size = new System.Drawing.Size(279, 522);
             this.panel.TabIndex = 2;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(73, 368);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(124, 130);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
             // lbBaht3
             // 
             this.lbBaht3.AutoSize = true;
@@ -319,9 +360,9 @@
             this.lbTotalBalance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.lbTotalBalance.Location = new System.Drawing.Point(16, 168);
             this.lbTotalBalance.Name = "lbTotalBalance";
-            this.lbTotalBalance.Size = new System.Drawing.Size(226, 25);
+            this.lbTotalBalance.Size = new System.Drawing.Size(86, 25);
             this.lbTotalBalance.TabIndex = 3;
-            this.lbTotalBalance.Text = "คงเหลือในเดือนปัจจุบัน";
+            this.lbTotalBalance.Text = "คงเหลือ";
             // 
             // lbTotalExpense
             // 
@@ -364,24 +405,6 @@
             this.toolStrip.TabIndex = 3;
             this.toolStrip.Text = "toolStrip1";
             // 
-            // toolStripHeader
-            // 
-            this.toolStripHeader.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripHeader.Name = "toolStripHeader";
-            this.toolStripHeader.Size = new System.Drawing.Size(249, 36);
-            this.toolStripHeader.Text = "บัญชีรับ-จ่าย ประจำเดือน ... พ.ศ. ...";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(73, 368);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(124, 130);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
             // toolStripAddTransaction
             // 
             this.toolStripAddTransaction.ForeColor = System.Drawing.Color.Blue;
@@ -391,6 +414,13 @@
             this.toolStripAddTransaction.Size = new System.Drawing.Size(123, 36);
             this.toolStripAddTransaction.Text = "เพิ่มรายการ";
             this.toolStripAddTransaction.Click += new System.EventHandler(this.toolStripAddTransaction_Click);
+            // 
+            // toolStripHeader
+            // 
+            this.toolStripHeader.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripHeader.Name = "toolStripHeader";
+            this.toolStripHeader.Size = new System.Drawing.Size(249, 36);
+            this.toolStripHeader.Text = "บัญชีรับ-จ่าย ประจำเดือน ... พ.ศ. ...";
             // 
             // toolStripLabel
             // 
@@ -404,6 +434,7 @@
             // 
             // toolStripViewHistory
             // 
+            this.toolStripViewHistory.Enabled = false;
             this.toolStripViewHistory.Image = ((System.Drawing.Image)(resources.GetObject("toolStripViewHistory.Image")));
             this.toolStripViewHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripViewHistory.Name = "toolStripViewHistory";
@@ -420,36 +451,6 @@
             this.toolStripBackToPresent.Text = "กลับไปเดือนปัจจุบัน";
             this.toolStripBackToPresent.Visible = false;
             this.toolStripBackToPresent.Click += new System.EventHandler(this.toolStripBackToPresent_Click);
-            // 
-            // btnCloseGroupBox
-            // 
-            this.btnCloseGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnCloseGroupBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCloseGroupBox.FlatAppearance.BorderSize = 0;
-            this.btnCloseGroupBox.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnCloseGroupBox.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnCloseGroupBox.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseGroupBox.Image")));
-            this.btnCloseGroupBox.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCloseGroupBox.Location = new System.Drawing.Point(838, 25);
-            this.btnCloseGroupBox.Name = "btnCloseGroupBox";
-            this.btnCloseGroupBox.Size = new System.Drawing.Size(42, 39);
-            this.btnCloseGroupBox.TabIndex = 5;
-            this.btnCloseGroupBox.UseVisualStyleBackColor = false;
-            this.btnCloseGroupBox.Click += new System.EventHandler(this.btnCloseGroupBox_Click);
-            // 
-            // btnShowData
-            // 
-            this.btnShowData.Enabled = false;
-            this.btnShowData.Image = ((System.Drawing.Image)(resources.GetObject("btnShowData.Image")));
-            this.btnShowData.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnShowData.Location = new System.Drawing.Point(387, 32);
-            this.btnShowData.Name = "btnShowData";
-            this.btnShowData.Size = new System.Drawing.Size(124, 28);
-            this.btnShowData.TabIndex = 2;
-            this.btnShowData.Text = "แสดงข้อมูล";
-            this.btnShowData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnShowData.UseVisualStyleBackColor = true;
-            this.btnShowData.Click += new System.EventHandler(this.btnShowData_Click);
             // 
             // toolStripReport
             // 
@@ -485,9 +486,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
